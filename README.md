@@ -235,7 +235,7 @@ forecast = predictor.predict_cashflow(
 ```
 ---
 <div align="center">
-May all our lives keep optimizing — like sleeping better. 💤
+May all our lives keep optimizing — like sleeping better lol. 💤
 </div>
 
 
