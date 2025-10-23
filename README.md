@@ -11,43 +11,28 @@
 JAX Inventory Optimizer addresses the fundamental challenge in supply chain management: minimizing inventory costs while maintaining service levels through hardware-accelerated computation and intelligent algorithms.
 
 ---
-
 ## Core Features
 
-### High-Performance Computing
-- **JAX-Accelerated**: JIT compilation, automatic differentiation, GPU/TPU support
-- **Distributed Training**: Data/model/hybrid parallelism (7.2x speedup on 8 GPUs)
-- **Vectorized Operations**: Efficient batch processing across multi-SKU portfolios
+## Engine
 
-### Multi-Paradigm Optimization
-- **Traditional Methods**: EOQ, Safety Stock, (s,S) Policy
-- **Machine Learning**: LSTM with Attention, Transformer architectures
-- **Reinforcement Learning**: Deep Q-Network (DQN) for dynamic control
+### Scalable ML Infrastructure
+- **JAX-Accelerated Computation** — End-to-end GPU/TPU acceleration with JIT compilation and automatic differentiation.  
+- **Distributed Training Framework** — Supports data, model, and hybrid parallelism (7.2× scaling on 8 GPUs).  
+- **Vectorized Workflows** — Batch-parallel optimization across large-scale SKU portfolios for efficient resource utilization.
 
-### Cost Optimization Suite
-- **Dynamic Inventory Optimization**: Strategy-based (Aggressive/Balanced/Conservative)
-- **Deadstock Detection**: Multi-dimensional risk assessment
-- **Cash Flow Prediction**: Monte Carlo simulation with confidence intervals
-
-
-##  From Research to Production: The End-to-End ML Lifecycle
-
-##  Machine Learning System Lifecycle
-
-We might divide the machine learning system lifecycle into **five key stages** — from data collection to intelligent deployment and continuous improvement.
-
-| Stage | Main Objective | Tools / Frameworks |
-|:------:|----------------|--------------------|
-| **1️⃣ Data Preparation (Data)** | Collect, clean, and label data | `pandas`, `Airflow`, `SQL` |
-| **2️⃣ Model Training (Modeling)** | Build, tune, and validate models | `PyTorch`, `JAX`, `sklearn` |
-| **3️⃣ Evaluation & Optimization (Evaluation)** | Compare experiments and select the best model | `Weights & Biases (W&B)`, `MLflow` |
-| **4️⃣ Deployment (Deployment)** | Package the model into a scalable API service | `Docker`, `FastAPI` |
-| **5️⃣ Monitoring & Maintenance (MLOps)** | Automate retraining, monitor drift, and manage versions | `Kubernetes`, `Prometheus`, `CI/CD` |
+### Production-Ready Engineering Stack
+- **Modular API Services** — FastAPI-based microservices for inference, simulation, and scheduling.  
+- **Monitoring & Reliability** — Integrated Prometheus metrics, logging, and latency profiling for robust deployment.  
+- **Automated Experimentation** — Full MLflow / W&B tracking pipeline with reproducible experiment orchestration.
 
 ---
-**steps 1–3:** make the model *run*  
-**step 4:** make the model *usable in production*  
-**step 5 (mlops):** make the model *sustain itself and evolve continuously*
+
+## Methods
+
+### Integrated Optimization Framework
+- **Hybrid Paradigm Design** — Combines classical inventory theory with machine learning and control-based optimization.  
+- **Machine Learning Layer** — LSTM and Transformer architectures for demand forecasting and temporal representation learning.  
+- **Reinforcement Learning Layer** — DQN-based adaptive policy control for real-time decision optimization.
 
 ---
 
@@ -175,65 +160,29 @@ JAX_Inventory_Optimizer/
 
 ---
 
-## Docker Deployment
+##  From Research to Production: The End-to-End ML Lifecycle
 
-```bash
-# CPU container
-docker build -t jax-inventory-optimizer .
-docker run -p 8000:8000 jax-inventory-optimizer
+## Machine Learning System Lifecycle
 
-# GPU container
-docker build -f Dockerfile.gpu -t jax-inventory-optimizer:gpu .
-docker run --gpus all -p 8000:8000 jax-inventory-optimizer:gpu
+The JAX Inventory Optimizer follows an end-to-end ML lifecycle — from data collection to deployment and continuous improvement. Future work focuses on automation and scalability, integrating retraining pipelines, distributed JAX infrastructure, feature store consistency, and real-time monitoring to build a fully autonomous optimization engine.
 
-# Docker Compose
-docker-compose up
-```
+| Stage | Main Objective | Tools / Frameworks | Future Work |
+|:------:|----------------|--------------------|--------------|
+| **1. Data Preparation (Data)** | Collect, clean, and label structured demand and inventory data | `pandas`, `Airflow`, `SQL` | Automate data ingestion pipelines and implement a centralized feature store. |
+| **2. Model Training (Modeling)** | Build, tune, and validate forecasting or control models | `PyTorch`, `JAX`, `scikit-learn` | Extend to distributed JAX training with asynchronous updates. |
+| **3. Evaluation & Optimization (Evaluation)** | Compare experiments and select the best-performing model | `Weights & Biases (W&B)`, `MLflow` | Integrate advanced experiment tracking and automated hyperparameter search. |
+| **4. Deployment (Deployment)** | Package and deploy as scalable APIs or services | `Docker`, `FastAPI` | Implement load-balanced API endpoints with caching and latency monitoring. |
+| **5. Monitoring & Maintenance (MLOps)** | Automate retraining, monitor drift, and manage versions | `Kubernetes`, `Prometheus`, `CI/CD` | Build continuous retraining pipelines with real-time drift detection. |
 
----
+**Steps 1–3:** make the model *run*  
+**Step 4:** make the model *usable in production*  
+**Step 5 (MLOps):** make the model *sustain itself and evolve continuously*
 
-## Kubernetes Deployment
 
-```bash
-# Deploy with Helm
-helm install inventory-optimizer ./helm/jax-optimizer
 
-# Or raw manifests
-kubectl apply -f k8s/
 
-# Check status
-kubectl get pods -l app=inventory-optimizer
-```
 
----
 
-## Advanced Features
-
-### Distributed Training
-```bash
-python experiments/distributed_training.py --strategy auto --profile
-```
-
-### Anomaly Detection
-```python
-from src.risk_management.anomaly_detector import AnomalyDetector
-
-detector = AnomalyDetector(method='zscore', threshold=3.0)
-anomalies = detector.detect(demand_history)
-```
-
-### Cash Flow Forecasting
-```python
-from src.cost_optimization.cashflow_predictor import CashFlowPredictor
-
-predictor = CashFlowPredictor()
-forecast = predictor.predict_cashflow(
-    inventory_levels=[100, 200],
-    demand_forecasts=[50, 80],
-    forecast_horizon=90
-)
-```
----
 <div align="center">
 May all our lives keep optimizing — like sleeping better lol. 💤
 </div>
