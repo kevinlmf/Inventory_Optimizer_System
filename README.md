@@ -1,4 +1,4 @@
-# JAX Inventory Optimizer
+# Inventory_Optimizer_System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -36,8 +36,8 @@ The system combines **classical inventory control** with **machine learning** an
 
 ### Installation
 ```bash
-git clone https://github.com/kevinlmf/JAX_Inventory_Optimizer
-cd JAX_Inventory_Optimizer
+git clone https://github.com/kevinlmf/Inventory_Optimizer_System
+cd Inventory_Optimizer_System
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
