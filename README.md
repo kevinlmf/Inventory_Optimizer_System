@@ -1,143 +1,104 @@
-# Inventory_Optimizer_System
+ ## Inventory Optimizer
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.0+-orange.svg)](https://github.com/google/jax)
+[![Website](https://img.shields.io/badge/Website-Live-success)](https://jax-inventory-saas-latest-9.onrender.com/)
 
-> **Enterprise-grade inventory optimization platform powered by JAX for accelerated computation and intelligent decision-making.**
 
----
-
-## Core Features
-
-### Scalable ML Infrastructure
-- **JAX-Accelerated Computation** — End-to-end GPU/TPU acceleration with JIT compilation and automatic differentiation.  
-- **Distributed Training Framework** — Supports data, model, and hybrid parallelism for large-scale optimization workloads.  
-- **Vectorized Workflows** — Batch-parallel computation across SKU portfolios for efficient resource utilization.
-
-### Production-Ready Engineering Stack
-- **Modular API Services** — FastAPI-based microservices for inference, simulation, and scheduling.  
-- **Monitoring & Reliability** — Integrated Prometheus metrics, structured logging, and latency profiling.  
-- **Automated Experimentation** — MLflow / W&B tracking pipelines for reproducible research and deployment.
 
 ---
 
-## Optimization Framework
+## System Overview
 
-### Hybrid Paradigm Design
-The system combines **classical inventory control** with **machine learning** and **reinforcement learning**:
-- **Traditional Methods:** EOQ, Safety Stock, and (s, S) models for stable environments.  
-- **ML Layer:** LSTM and Transformer-based demand forecasting for dynamic patterns.  
-- **RL Layer:** DQN agent for adaptive policy control in stochastic environments.
+**The Problem**: Traditional inventory methods (EOQ, Safety Stock) work well in simple, stable environments but fail in complex, dynamic scenarios with seasonality, trends, and uncertainty.
 
----
+**The Solution**: Reinforcement Learning and Deep Learning algorithms might learn complex patterns, adapt to changes, and outperform traditional methods by 3-5% in net profit and 10-15% in revenue.
 
-## Quick Start
-
-### Installation
-```bash
-git clone https://github.com/kevinlmf/Inventory_Optimizer_System
-cd Inventory_Optimizer_System
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### Verify Setup
-```bash
-python -c "import jax; print(f'JAX version: {jax.__version__}')"
-python -c "import jax; print(f'Devices: {jax.devices()}')"
-```
-
-### Run Demo
-```bash
-# Run all demos
-./run_all_demos.sh
-
-# Start API server
-uvicorn src.api.main:app --reload
-```
+**Why JAX?**: 10-100x speedup in training and inference, making RL/DL practical for real-time inventory optimization.
 
 ---
 
-## Examples
-
-```bash
-# Compare all optimization methods (Traditional + ML + RL)
-python experiments/compare_all_methods.py
-
-# Enterprise demo: Cost optimization + Risk management
-python experiments/demo_enterprise.py
-
-# API service demonstration
-python experiments/demo_api.py
-```
-
-More examples are available in [`examples/`](examples/README.md).
-
----
-
-## Architecture
+## System Architecture
 
 ```
-JAX_Inventory_Optimizer/
-├── src/
-│   ├── core/                    # Core framework
-│   ├── methods/                 # Optimization algorithms
-│   │   ├── traditional/         # EOQ, Safety Stock
-│   │   ├── ml_methods/          # LSTM, Transformer
-│   │   └── rl_methods/          # DQN agent
-│   ├── cost_optimization/       # Financial analytics
-│   ├── risk_management/         # Anomaly detection
-│   ├── distributed/             # Multi-GPU training
-│   ├── api/                     # FastAPI service
-│   └── data/                    # Data management
-├── experiments/                 # Demo scripts
-├── k8s/                         # Kubernetes manifests
-├── helm/                        # Helm charts
-└── requirements.txt
+User Input → Model Selection → Optimization (EOQ/DQN/LSTM) → Demand Forecast → Inventory Recommendation → Visualization
 ```
 
----
+### Current Implementation Flow
 
-## Performance Summary
+| Step | Function | Status | Methods |
+|------|----------|--------|---------|
+| 1. Input | User parameters (stock, demand, costs) | ✅ Implemented | Streamlit UI |
+| 2. Model Selection | Choose optimization method | ✅ Implemented | EOQ, Safety Stock, LSTM, DQN |
+| 3. Optimization | Calculate optimal order quantity | ✅ Implemented | Traditional & ML methods |
+| 4. Forecasting | Predict future demand | ✅ Implemented | LSTM (basic), Simple forecast |
+| 5. Visualization | Display results | ✅ Implemented | Streamlit charts, inventory curves |
 
-| Metric | Value | Description |
-|--------|-------|-------------|
-| Computation Speed | 10–100× faster | JAX vs NumPy (GPU) |
-| JIT Optimization | 50–100× faster | Portfolio optimization |
-| Inference Latency | < 10 ms | Per recommendation |
-| Distributed Scaling | 7.2× on 8 GPUs | Data parallelism |
-| Cost Reduction | 20–35% | Real-world benchmarks |
-
----
-
-## Method Comparison
-
-| Method | Training | Inference | Adaptability | Best Use Case |
-|--------|-----------|------------|---------------|----------------|
-| EOQ | None | < 1 ms | Low | Stable demand |
-| Safety Stock | None | < 1 ms | Medium | Service target control |
-| LSTM | 1–5 min | < 10 ms | High | Complex temporal patterns |
-| DQN | 10–60 min | < 5 ms | Very High | Dynamic stochastic systems |
+**Note**: The full 5-layer pipeline (Data → Forecasting → Optimization → Risk Control → Monitoring) is the target architecture. Currently implemented:
+- ✅ **Optimization Layer**: Multiple methods (EOQ, Safety Stock, LSTM, DQN)
+- ✅ **Forecasting Layer**: Basic LSTM and simple forecasting
+- ⚠️ **Risk Control**: Modules exist but not integrated in main flow
+- ⚠️ **Monitoring**: Basic visualization, no real-time alerts
 
 ---
 
+## ✅ What's Implemented
+
+### Web SaaS Platform
+- **Streamlit UI**: Interactive web interface with parameter adjustment, real-time optimization, visualizations, and model selection (EOQ, Safety Stock, LSTM, DQN)
+- **FastAPI Backend**: RESTful API with `/optimize`, `/recommend`, `/health` endpoints, model caching, and error handling
+
+### Core Algorithms
+- **Traditional**: EOQ, Safety Stock, (s,S) Policy
+- **Machine Learning**: LSTM for demand forecasting, Transformer architecture
+- **Reinforcement Learning**: DQN for adaptive optimization
+
+###  Business Features
+- **Cost Optimization**: Dynamic inventory optimizer, deadstock detection, JIT ordering
+
+---
+
+## Future Work
+
+### Advanced Features
+- [ ] Batch processing, multi-echelon optimization, real-time monitoring, alerts, analytics
+
+### Enhanced ML/RL
+- [ ] More RL algorithms (PPO, A3C), transfer learning, online learning, ensemble methods, causal modeling
+
+
+###  Model Management & MLOps
+- [ ] MLflow integration for experiment tracking and hyperparameter tuning
+- [ ] Model versioning and registry (MLflow Model Registry)
+- [ ] Automated hyperparameter optimization (Optuna, Ray Tune)
+- [ ] A/B testing framework
+
+
+
+
+
+---
 ## From Research to Production: End-to-End ML Lifecycle
 
 The JAX Inventory Optimizer implements a complete machine learning lifecycle — from data ingestion to deployment and continuous self-improvement. The framework integrates distributed JAX training, retraining pipelines, and real-time monitoring to enable a fully autonomous optimization engine.
 
-| Stage | Objective | Tools / Frameworks | Future Direction |
-|:------:|------------|--------------------|------------------|
-| **1. Data Preparation** | Collect and preprocess structured demand and inventory data | `pandas`, `Airflow`, `SQL` | Automated ingestion pipelines and centralized feature store |
-| **2. Model Training** | Build and validate forecasting or control models | `PyTorch`, `JAX`, `scikit-learn` | Distributed JAX training with asynchronous updates |
-| **3. Evaluation & Optimization** | Compare experiments and select optimal models | `Weights & Biases`, `MLflow` | Automated hyperparameter tuning and advanced experiment tracking |
-| **4. Deployment** | Package and serve scalable inference APIs | `Docker`, `FastAPI` | Load-balanced endpoints with caching and latency monitoring |
-| **5. Monitoring & Maintenance** | Automate retraining and detect model drift | `Kubernetes`, `Prometheus`, `CI/CD` | Real-time drift detection and continuous retraining pipelines |
+| Stage | Objective | Tools / Frameworks | Current Status |
+|:------:|------------|--------------------|----------------|
+| **1. Data Preparation** | Collect and preprocess structured demand and inventory data | `pandas`, `numpy`, sample data | ✅ Basic data handling, sample datasets |
+| **2. Model Training** | Build and validate forecasting or control models | `JAX`, `scikit-learn`, traditional methods | ✅ EOQ, Safety Stock, LSTM, DQN implemented |
+| **3. Evaluation & Optimization** | Compare experiments and select optimal models | Model comparison, confidence scores, WandB tracking | ✅ Multiple methods comparison, fallback mechanisms, WandB integration |
+| **4. Deployment** | Package and serve scalable inference APIs | `Docker`, `FastAPI`, `Streamlit`, `Render` | ✅ Docker containerization, Render web deployment |
+| **5. Monitoring & Maintenance** | Health checks and error handling | FastAPI health endpoints, logging | ✅ Basic monitoring, error recovery |
 
-Together, these stages form a closed-loop system — from development to production and back — enabling the optimizer to evolve continuously under real-world dynamics.
-
+**Current Deployment Stack**:
+- **Containerization**: Docker (`Dockerfile.streamlit`)
+- **Web Platform**: Render (cloud deployment)
+- **Backend API**: FastAPI (RESTful endpoints)
+- **Frontend UI**: Streamlit (interactive web interface)
 ---
+
+
 
 <div align="center"> May all our lives keep optimizing — like sleeping better lol. 💤 </div>
 
